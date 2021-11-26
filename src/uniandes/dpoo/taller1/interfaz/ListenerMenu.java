@@ -15,7 +15,7 @@ public class ListenerMenu implements ActionListener
 {
 
 	// ************************************************************************
-	// Constantes
+	// Constanteszzz
 	// ************************************************************************
 
 	public static final String ABRIR_LIBROS = "ABRIR_LIBROS";
