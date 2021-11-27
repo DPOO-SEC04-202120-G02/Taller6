@@ -5,8 +5,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+
+
+import uniandes.dpoo.taller1.interfaz.PanelCategorias;
 
 /**
  * Esta clase agrupa toda la información de una librería: las categorías que se
@@ -30,6 +35,8 @@ public class Libreria
 	 * Una lista con los libros disponibles en la librería
 	 */
 	private ArrayList<Libro> catalogo;
+
+	private ArrayList<Categoria> categorias_nuevas= new ArrayList<Categoria>();
 
 	// ************************************************************************
 	// Constructores
@@ -139,7 +146,8 @@ public class Libreria
 
 		BufferedReader br = new BufferedReader(new FileReader(nombreArchivoLibros));
 		String linea = br.readLine(); // Ignorar la primera línea porque tiene los títulos:
-										// Titulo,Autor,Calificacion,Categoria,Portada,Ancho,Alto
+		// Titulo,Autor,Calificacion,Categoria,Portada,Ancho,Alto
+
 
 		linea = br.readLine();
 		while (linea != null)
@@ -154,7 +162,21 @@ public class Libreria
 			int ancho = Integer.parseInt(partes[5]);
 			int alto = Integer.parseInt(partes[6]);
 
+
+
+
+			if (laCategoria==null) {
+				Categoria cat_new=new Categoria(nombreCategoria,false);
+				ArrayList<Categoria> categorias_old = new ArrayList<Categoria>(Arrays.asList(categorias)); 
+				categorias_old.add(cat_new);
+				this.categorias_nuevas.add(cat_new);
+				categorias=categorias_old.toArray(categorias); 
+				laCategoria=cat_new;
+			}
+
+
 			// Crear un nuevo libro
+
 			Libro nuevo = new Libro(elTitulo, elAutor, laCalificacion, laCategoria);
 			libros.add(nuevo);
 
@@ -167,10 +189,14 @@ public class Libreria
 
 			linea = br.readLine();
 		}
-
+		
 		br.close();
-
+		
 		return libros;
+	}
+
+	public ArrayList<Categoria> ReturnCategorias_new(){
+		return categorias_nuevas;
 	}
 
 	/**

@@ -171,10 +171,23 @@ public class InterfazLibreria extends JFrame
 		{
 			libreria = new Libreria(archivo_categorias.getPath(), archivo_libros.getPath());
 			panelCategorias.actualizarCategorias(libreria.darCategorias());
+			ArrayList<Categoria> nuevas= libreria.ReturnCategorias_new();
+			String msg="";
+			for (Categoria categoria : nuevas) {
+				msg+="Agregada: "+categoria.darNombre()+"\n";
+			}
+			if(msg.length()!=0) {
+				JOptionPane.showMessageDialog(this, msg, "Error de lectura",
+						JOptionPane.ERROR_MESSAGE);
+			}else {
+				JOptionPane.showMessageDialog(this, "No se crearon nuevas categorias", "Error de lectura",
+						JOptionPane.WARNING_MESSAGE);
+			}
+			
 		}
 		catch (Exception e)
 		{
-			JOptionPane.showMessageDialog(this, "Hubo un error leyendo los archivos", "Error de lectura",
+			JOptionPane.showMessageDialog(this, "Error al cargar", "Error de lectura",
 					JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
