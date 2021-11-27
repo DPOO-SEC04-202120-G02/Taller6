@@ -451,4 +451,24 @@ public class Libreria
 		return hayAutorEnVariasCategorias;
 	}
 
+	public void RenombrarCategoria(String oldName, String newName) throws ExceptionCategoriaRepetida {
+		
+		boolean existe = false;
+		Categoria cat=null;
+		int i=0;
+		while(!existe && i<this.categorias.length) {
+			if(categorias[i].darNombre().equals(newName)) {
+				existe=true;
+			}
+			if(categorias[i].darNombre().equals(oldName)) {
+				cat=categorias[i];
+			}
+			i++;
+		}
+		if(existe) {
+			throw new ExceptionCategoriaRepetida();
+		}
+		cat.CambiarNombre(newName);
+	}
+	
 }

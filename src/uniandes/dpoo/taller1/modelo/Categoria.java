@@ -182,4 +182,8 @@ public class Categoria
 		return nombre;
 	}
 
+	public void CambiarNombre(String newName) {
+		nombre=newName;
+	}
+	
 }

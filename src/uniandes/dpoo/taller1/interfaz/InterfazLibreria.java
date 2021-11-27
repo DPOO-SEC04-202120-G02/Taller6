@@ -21,6 +21,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import uniandes.dpoo.taller1.modelo.Categoria;
+import uniandes.dpoo.taller1.modelo.ExceptionCategoriaRepetida;
 import uniandes.dpoo.taller1.modelo.Libreria;
 import uniandes.dpoo.taller1.modelo.Libro;
 
@@ -358,6 +359,22 @@ public class InterfazLibreria extends JFrame
 			mensaje = "Hay al menos un autor con al menos un libro en dos categorías diferentes.";
 		}
 		JOptionPane.showMessageDialog(this, mensaje, "Consulta", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public void RenombrarCategoria(){
+		String NombreViejo=JOptionPane.showInputDialog("Nombre de la categoria a cambiar:");
+		String NombreNuevo=JOptionPane.showInputDialog("Nombre nuevo");
+		if(NombreNuevo.equals(NombreViejo)) {
+			JOptionPane.showMessageDialog(this,"El nombre viejo y el nuevo no pueden ser iguales","Cuidado",JOptionPane.ERROR_MESSAGE);
+		}else {
+			try {
+				libreria.RenombrarCategoria(NombreViejo, NombreNuevo);
+			}catch(ExceptionCategoriaRepetida ec) {
+				JOptionPane.showMessageDialog(this,ec.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	// ************************************************************************
