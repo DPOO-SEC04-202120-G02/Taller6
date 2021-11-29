@@ -488,9 +488,10 @@ public class Libreria
 				String autorLibroActual = libroActual.darAutor();
 				if (autor == autorLibroActual) {
 					catalogo.remove(j);
-					cantidad++;
+					cant++;
 				}
 			}
 		}
+		return cant;
 	}
 }

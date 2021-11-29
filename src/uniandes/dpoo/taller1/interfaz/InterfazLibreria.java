@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -376,6 +377,18 @@ public class InterfazLibreria extends JFrame
 			}
 		}
 	}
+	
+	public void eliminarLibros() {
+		String grupoAutores = JOptionPane.showInputDialog("Grupo de autores: ");
+		String[] arrayStr = grupoAutores.split(",");
+		ArrayList<String> autores = (ArrayList<String>) Arrays.asList(arrayStr);  
+		try {
+			libreria.eliminarLibros(autores);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 	// ************************************************************************
 	// Main
@@ -410,5 +423,7 @@ public class InterfazLibreria extends JFrame
 
 		new InterfazLibreria();
 	}
+
+
 
 }
