@@ -471,27 +471,33 @@ public class Libreria
 		cat.CambiarNombre(newName);
 	}
 	
-	public int eliminarLibros(ArrayList<String> autores) {
+	public int eliminarLibros(ArrayList<String> autores) throws ExcEliminarLibros{
 		int cant = 0;
-		
+		boolean trigger = false;
+		ArrayList<String> noPosibles = new ArrayList<String>();
 		for (String autor : autores) {
-			try {
-				ArrayList<Libro> librosAutor = buscarLibrosAutor(autor);
+			ArrayList<Libro> librosAutor = buscarLibrosAutor(autor);
+			if (librosAutor.isEmpty()) {
+				noPosibles.add(autor);
+				trigger = true;
 			}
-			catch (Exception e) {
-				System.out.println("Autor(a) " + autor + "no tiene ningún libro en el catalogo.");
-				System.out.println(e.getMessage());
-			}
-		
-			for (int j = 0; j < catalogo.size(); j++) {
-				Libro libroActual = catalogo.get(j);
-				String autorLibroActual = libroActual.darAutor();
-				if (autor == autorLibroActual) {
-					catalogo.remove(j);
-					cant++;
+		}
+		if (trigger = true) {
+			throw new ExcEliminarLibros(noPosibles);
+		}
+		else {
+			for (String elem : autores) {
+				for (int j = 0; j < catalogo.size(); j++) {
+					Libro libroActual = catalogo.get(j);
+					String autorLibroActual = libroActual.darAutor();
+					if (elem == autorLibroActual) {
+						catalogo.remove(j);
+						cant++;
+					}
 				}
 			}
 		}
 		return cant;
-	}
 }
+}
+

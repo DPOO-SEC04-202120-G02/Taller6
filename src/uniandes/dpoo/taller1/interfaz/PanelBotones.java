@@ -75,8 +75,8 @@ public class PanelBotones extends JPanel implements ActionListener
 		agregarBoton(CONTAR_SIN_PORTADA, "Buscar libro con titulo", "./data/iconos/libro.png");
 		agregarBoton(CATEGORIA_MEJOR, "Buscar libro con titulo", "./data/iconos/premio.png");
 		agregarBoton(AUTOR_VARIAS_CATEGORIAS, "Buscar libro con titulo", "./data/iconos/autor.png");
-		agregarBoton(CAMBIAR_NOMBRE_CATEGORIA, "Renombrar categoria", "./data/iconos/Change_cat.png");
-		agregarBoton(ELIMINAR_LIBROS, "Eliminar libros", "./data/iconos/2a93a9c7d61633bb4f11f0eae6f20ec5.png");
+		agregarBoton(CAMBIAR_NOMBRE_CATEGORIA, "Renombrar categoria", "./cambios/Change_cat.png");
+		agregarBoton(ELIMINAR_LIBROS, "Eliminar libros", "./cambios/2a93a9c7d61633bb4f11f0eae6f20ec5.png");
 	}
 
 	// ************************************************************************

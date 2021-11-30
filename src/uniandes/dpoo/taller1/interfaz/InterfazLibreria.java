@@ -22,6 +22,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import uniandes.dpoo.taller1.modelo.Categoria;
+import uniandes.dpoo.taller1.modelo.ExcEliminarLibros;
 import uniandes.dpoo.taller1.modelo.ExceptionCategoriaRepetida;
 import uniandes.dpoo.taller1.modelo.Libreria;
 import uniandes.dpoo.taller1.modelo.Libro;
@@ -98,9 +99,12 @@ public class InterfazLibreria extends JFrame
 	/**
 	 * Construye la ventana principal para la aplicación, pero no carga la
 	 * información de ninguna librería.
+	 * @param archLib 
+	 * @param archCat 
+	 * @throws IOException 
 	 */
-	public InterfazLibreria()
-	{
+	public InterfazLibreria() throws IOException
+	{	
 		barraMenu = new JMenuBar();
 		setJMenuBar(barraMenu);
 
@@ -381,11 +385,12 @@ public class InterfazLibreria extends JFrame
 	public void eliminarLibros() {
 		String grupoAutores = JOptionPane.showInputDialog("Grupo de autores: ");
 		String[] arrayStr = grupoAutores.split(",");
-		ArrayList<String> autores = (ArrayList<String>) Arrays.asList(arrayStr);  
+		ArrayList<String> autores = new ArrayList<String>(Arrays.asList(arrayStr));
 		try {
-			libreria.eliminarLibros(autores);
-		}catch(Exception e) {
-			e.printStackTrace();
+			int resp = libreria.eliminarLibros(autores);
+			JOptionPane.showMessageDialog(this, this, "Operaci�n exitosa, se elimaron " + String.valueOf(resp) + "libros", JOptionPane.INFORMATION_MESSAGE);
+		}catch(ExcEliminarLibros ec) {
+			JOptionPane.showMessageDialog(this,ec.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -419,7 +424,6 @@ public class InterfazLibreria extends JFrame
 		*/
 		FlatLightLaf.install();
 		// UIManager.setLookAndFeel( new FlatDarculaLaf());
-
 
 		new InterfazLibreria();
 	}
