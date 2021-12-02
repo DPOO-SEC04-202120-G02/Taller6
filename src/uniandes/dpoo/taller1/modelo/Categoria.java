@@ -168,6 +168,10 @@ public class Categoria
 
 		return librosAutor;
 	}
+	
+	public void quitarLibro(Libro libro) {
+		libros.remove(libro);
+	}
 
 	// ************************************************************************
 	// Métodos sobrecargados

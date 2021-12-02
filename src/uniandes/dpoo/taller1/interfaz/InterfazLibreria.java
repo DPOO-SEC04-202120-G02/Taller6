@@ -384,14 +384,16 @@ public class InterfazLibreria extends JFrame
 	
 	public void eliminarLibros() {
 		String grupoAutores = JOptionPane.showInputDialog("Grupo de autores: ");
+		
 		String[] arrayStr = grupoAutores.split(",");
-		ArrayList<String> autores = new ArrayList<String>(Arrays.asList(arrayStr));
 		try {
-			int resp = libreria.eliminarLibros(autores);
-			JOptionPane.showMessageDialog(this, this, "Operación exitosa, se elimaron " + String.valueOf(resp) + "libros", JOptionPane.INFORMATION_MESSAGE);
+			int resp = libreria.eliminarLibros(arrayStr);
+			System.out.println(resp);
+			JOptionPane.showMessageDialog(this, "Operación exitosa, " + String.valueOf(resp) + " libro(s) eliminado(s)", "Operación exitosa", JOptionPane.INFORMATION_MESSAGE);
 		}catch(ExcEliminarLibros ec) {
 			JOptionPane.showMessageDialog(this,ec.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 		}
+		
 	}
 	
 

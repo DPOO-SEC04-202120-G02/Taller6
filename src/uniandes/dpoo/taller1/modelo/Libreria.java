@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-
+import java.util.Iterator;
 
 import uniandes.dpoo.taller1.interfaz.PanelCategorias;
 
@@ -471,9 +471,10 @@ public class Libreria
 		cat.CambiarNombre(newName);
 	}
 	
-	public int eliminarLibros(ArrayList<String> autores) throws ExcEliminarLibros{
+	public int eliminarLibros(String[] autores) throws ExcEliminarLibros {
 		int cant = 0;
 		boolean trigger = false;
+
 		ArrayList<String> noPosibles = new ArrayList<String>();
 		for (String autor : autores) {
 			ArrayList<Libro> librosAutor = buscarLibrosAutor(autor);
@@ -482,20 +483,20 @@ public class Libreria
 				trigger = true;
 			}
 		}
-		if (trigger = true) {
-			throw new ExcEliminarLibros(noPosibles);
-		}
-		else {
-			for (String elem : autores) {
-				for (int j = 0; j < catalogo.size(); j++) {
-					Libro libroActual = catalogo.get(j);
-					String autorLibroActual = libroActual.darAutor();
-					if (elem == autorLibroActual) {
-						catalogo.remove(j);
-						cant++;
-					}
+
+		if (trigger == false) {
+			for (int i = 0; i < autores.length; i++) {
+				ArrayList<Libro> librosAutor = buscarLibrosAutor(autores[i]);
+				cant += librosAutor.size();
+				for (Libro libro: librosAutor) {
+					Categoria categoria = libro.darCategoria();
+					catalogo.remove(libro);
+					categoria.quitarLibro(libro);
 				}
-			}
+			}	
+		}
+		else if (trigger = true) {
+			throw new ExcEliminarLibros(noPosibles);
 		}
 		return cant;
 }
