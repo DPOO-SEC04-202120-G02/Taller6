@@ -499,6 +499,6 @@ public class Libreria
 			throw new ExcEliminarLibros(noPosibles);
 		}
 		return cant;
-}
+	}
 }
 

@@ -370,12 +370,12 @@ public class InterfazLibreria extends JFrame
 		String NombreViejo=JOptionPane.showInputDialog("Nombre de la categoria a cambiar:");
 		String NombreNuevo=JOptionPane.showInputDialog("Nombre nuevo");
 		if(NombreNuevo.equals(NombreViejo)) {
-			JOptionPane.showMessageDialog(this,"El nombre viejo y el nuevo no pueden ser iguales","Cuidado",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "El nombre viejo y el nuevo no pueden ser iguales", "Cuidado", JOptionPane.ERROR_MESSAGE);
 		}else {
 			try {
 				libreria.RenombrarCategoria(NombreViejo, NombreNuevo);
 			}catch(ExceptionCategoriaRepetida ec) {
-				JOptionPane.showMessageDialog(this,ec.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this,ec.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -384,16 +384,15 @@ public class InterfazLibreria extends JFrame
 	
 	public void eliminarLibros() {
 		String grupoAutores = JOptionPane.showInputDialog("Grupo de autores: ");
-		
 		String[] arrayStr = grupoAutores.split(",");
 		try {
 			int resp = libreria.eliminarLibros(arrayStr);
 			System.out.println(resp);
 			JOptionPane.showMessageDialog(this, "Operación exitosa, " + String.valueOf(resp) + " libro(s) eliminado(s)", "Operación exitosa", JOptionPane.INFORMATION_MESSAGE);
-		}catch(ExcEliminarLibros ec) {
-			JOptionPane.showMessageDialog(this,ec.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 		}
-		
+		catch(ExcEliminarLibros ec) {
+			JOptionPane.showMessageDialog(this, ec.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 
